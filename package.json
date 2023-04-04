@@ -1,0 +1,16 @@
+{
+  "name": "ssu-drive-front",
+  "version": "1.0.0",
+  "repository": "https://github.com/SSU-OpenSource-5/ssu-drive-front.git",
+  "license": "MIT",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "projects/**"
+    ]
+  },
+  "scripts": {
+    "web": "yarn workspace @ssu-drive/web",
+    "mobile": "yarn workspace @ssu-drive/mobile"
+  }
+}
