@@ -21,8 +21,8 @@ jobs:
           API_TOKEN_GITHUB: ${{ secrets.AUTO_JUNGEOL }}
         with:
           source-directory: 'output'
-          destination-github-username: jungeol-h
-          destination-repository-name: ssu-drive-front
+          destination-github-username: 'jungeol-h'
+          destination-repository-name: 'ssu-drive-front'
           user-email: ${{ secrets.OFFICIAL_EMAIL }}
           commit-message: ${{ github.event.commits[0].message }}
           target-branch: main
