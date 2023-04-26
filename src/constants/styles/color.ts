@@ -10,3 +10,6 @@ const COLORS = {
   accent: '#FAB145',
   red: '#FF4040',
 };
+
+
+export {}
