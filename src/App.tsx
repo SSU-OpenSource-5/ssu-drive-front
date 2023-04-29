@@ -2,6 +2,9 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import MainPage from './pages/MainPage';
 import DrivingPage from './pages/DrivingPage';
 import { Container } from './App.css';
+import BottomNavigation from './components/BottomNavigation/BottomNaviagtion';
+import { ThemeProvider } from '@mui/material/styles';
+import theme from './theme';
 
 const router = createBrowserRouter([
   {
@@ -17,7 +20,10 @@ const router = createBrowserRouter([
 function App() {
   return (
     <div className={`App ${Container}`}>
-      <RouterProvider router={router} />
+      <ThemeProvider theme={theme}>
+        <RouterProvider router={router} />
+        <BottomNavigation />
+      </ThemeProvider>
     </div>
   );
 }
