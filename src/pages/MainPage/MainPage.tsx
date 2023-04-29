@@ -3,6 +3,7 @@ import MainArticle from '../../components/MainArticle';
 import FeedbackBox from '../../components/FeedbackBox';
 
 import * as styles from './MainPage.css';
+import DegreeBox from '../../components/DegreeBox';
 
 const dummyFeedBack = [
   {
@@ -28,6 +29,12 @@ const dummyFeedBack = [
   },
 ];
 
+const dummyDegree = [
+  { type: '안전운전', degree: 36.5 },
+  { type: '매너운전', degree: 37.5 },
+  { type: '센스운전', degree: 24.4 },
+];
+
 // TODO 운전 지수 컴포넌트 교체
 const MainTemplate = () => {
   const navigate = useNavigate();
@@ -35,7 +42,12 @@ const MainTemplate = () => {
   return (
     <div className={styles.wrapper}>
       <MainArticle />
-      <div className={styles.driveDegreeBox}>운전 지수</div>
+      <div className={styles.DegreeBoxWrapper}>
+        운전 지수
+        {dummyDegree.map((degree) => (
+          <DegreeBox type={degree.type} degree={degree.degree} />
+        ))}
+      </div>
       <div className={styles.feedboxsWrapper}>
         {dummyFeedBack.map((feedback) => (
           <FeedbackBox
