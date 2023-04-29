@@ -1,8 +1,8 @@
 import React from 'react';
+import { useLocation, Link } from 'react-router-dom';
 
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 
 import { ReactComponent as Cog } from '../../assets/icons/cog.svg';
@@ -28,7 +28,7 @@ const BottomNavbar = () => {
     >
       <BottomNavigation
         showLabels
-        value={value}
+        value={useLocation().pathname}
         // onChange={(event, newValue) => {
         //     setValue(newValue);
         // }}
@@ -36,10 +36,22 @@ const BottomNavbar = () => {
           setValue(newValue);
         }}
       >
-        <BottomNavigationAction label="홈" icon={<Home />} />
-        <BottomNavigationAction label="주행" icon={<Auto />} />
-        <BottomNavigationAction label="편집" icon={<Film />} />
-        <BottomNavigationAction label="설정" icon={<Cog />} />
+        <BottomNavigationAction
+          component={Link}
+          to="/main"
+          value="/main"
+          label="홈"
+          icon={<Home />}
+        />
+        <BottomNavigationAction
+          component={Link}
+          to="/drive"
+          value="/drive"
+          label="주행"
+          icon={<Auto />}
+        />
+        {/* <BottomNavigationAction label="편집" icon={<Film />} />
+        <BottomNavigationAction label="설정" icon={<Cog />} /> */}
       </BottomNavigation>
     </Paper>
     // </Box>
