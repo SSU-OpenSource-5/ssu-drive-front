@@ -14,43 +14,43 @@ export type TextStyleName =
 interface TextStyle {
   fontSize: number;
   fontWeight: number;
-  lineHeight: number;
+  lineHeight: string;
 }
 
 export const TEXT_STYLES: Record<TextStyleName, TextStyle> = {
   [TEXT_STYLE_NAME.headline1]: {
     fontSize: 28,
     fontWeight: 800,
-    lineHeight: 34,
+    lineHeight: '34px',
   },
   [TEXT_STYLE_NAME.headline2]: {
     fontSize: 24,
     fontWeight: 800,
-    lineHeight: 29,
+    lineHeight: '29px',
   },
   [TEXT_STYLE_NAME.headline3]: {
     fontSize: 22,
     fontWeight: 800,
-    lineHeight: 26,
+    lineHeight: '26px',
   },
   [TEXT_STYLE_NAME.headline4]: {
     fontSize: 18,
     fontWeight: 700,
-    lineHeight: 22,
+    lineHeight: '22px',
   },
   [TEXT_STYLE_NAME.headline5]: {
     fontSize: 16,
     fontWeight: 700,
-    lineHeight: 19,
+    lineHeight: '19px',
   },
   [TEXT_STYLE_NAME.body1B]: {
     fontSize: 15,
     fontWeight: 800,
-    lineHeight: 18,
+    lineHeight: '18px',
   },
   [TEXT_STYLE_NAME.body1R]: {
     fontSize: 15,
     fontWeight: 400,
-    lineHeight: 18,
+    lineHeight: '18px',
   },
 };

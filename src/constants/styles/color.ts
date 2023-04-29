@@ -1,4 +1,4 @@
-const COLORS = {
+export const COLORS = {
   grayscale: {
     gray0: '#FFFFFF',
     gray1: '#F9F9F9',
