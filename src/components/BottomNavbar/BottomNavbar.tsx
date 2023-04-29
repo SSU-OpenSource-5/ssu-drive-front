@@ -10,6 +10,7 @@ import { ReactComponent as Film } from '../../assets/icons/film.svg';
 import { ReactComponent as Auto } from '../../assets/icons/auto.svg';
 
 import { ReactComponent as Home } from '../../assets/icons/home.svg';
+import { SvgIcon } from '@mui/material';
 
 const BottomNavbar = () => {
   const [value, setValue] = React.useState(0);
@@ -41,14 +42,14 @@ const BottomNavbar = () => {
           to="/main"
           value="/main"
           label="홈"
-          icon={<Home />}
+          icon={<SvgIcon component={Home} />}
         />
         <BottomNavigationAction
           component={Link}
           to="/drive"
           value="/drive"
           label="주행"
-          icon={<Auto />}
+          icon={<SvgIcon component={Auto} />}
         />
         {/* <BottomNavigationAction label="편집" icon={<Film />} />
         <BottomNavigationAction label="설정" icon={<Cog />} /> */}
