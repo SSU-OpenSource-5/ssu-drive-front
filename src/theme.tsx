@@ -7,9 +7,9 @@ const theme = createTheme({
     primary: {
       main: COLORS.accent,
     },
-    // secondary: {
-    //   main: COLORS.,
-    // },
+    secondary: {
+      main: COLORS.grayscale.gray0,
+    },
     error: {
       main: '#000',
     },
