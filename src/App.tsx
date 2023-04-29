@@ -17,10 +17,6 @@ const router = createBrowserRouter([
         element: <MainPage />,
       },
       {
-        path: 'main',
-        element: <MainPage />,
-      },
-      {
         path: 'drive',
         element: <DrivingPage />,
       },

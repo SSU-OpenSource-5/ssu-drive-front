@@ -39,8 +39,8 @@ const BottomNavbar = () => {
       >
         <BottomNavigationAction
           component={Link}
-          to="/main"
-          value="/main"
+          to="/"
+          value="/"
           label="홈"
           icon={<SvgIcon component={Home} />}
         />
