@@ -12,7 +12,16 @@ export default defineConfig({
     {
       name: 'configure-response-headers',
       configureServer: (server) => {
-        console.log('proxy working');
+        server.middlewares.use((_req, res, next) => {
+          res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+          res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
+          next();
+        });
+      },
+    },
+    {
+      name: 'configure-response-headers-preview',
+      configurePreviewServer: (server) => {
         server.middlewares.use((_req, res, next) => {
           res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
           res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
