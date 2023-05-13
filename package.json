@@ -9,15 +9,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.8",
-    "@emotion/styled": "^11.10.8",
-    "@mui/material": "^5.12.2",
+    "@emotion/react": "11.10.8",
+    "@emotion/styled": "11.10.8",
+    "@ffmpeg/ffmpeg": "0.11.6",
+    "@mui/material": "5.12.2",
     "@vanilla-extract/css": "1.11.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "6.10.0",
-    "vite-plugin-svgr": "^2.4.0",
-    "react-step-progress-bar": "^1.0.3",
+    "react-step-progress-bar": "1.0.3",
+    "react-webcam": "7.0.1",
+    "vite-plugin-svgr": "2.4.0",
     "zustand": "4.3.7"
   },
   "devDependencies": {
