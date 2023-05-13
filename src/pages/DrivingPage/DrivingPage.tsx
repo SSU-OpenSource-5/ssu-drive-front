@@ -1,3 +1,9 @@
-const DrivingPage = () => <div>DrivingPage</div>;
+import DrivingCam from '../../components/DrivingCam';
+
+const DrivingPage = () => (
+  <div>
+    <DrivingCam />
+  </div>
+);
 
 export default DrivingPage;
