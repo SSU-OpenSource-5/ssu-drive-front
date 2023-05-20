@@ -30,7 +30,7 @@ const dummyFeedBack = [
 ];
 
 const dummyDegree = [
-  { type: '안전운전', degree: 36.5 },
+  { type: '안전운전', degree: 23.5 },
   { type: '매너운전', degree: 37.5 },
   { type: '센스운전', degree: 24.4 },
 ];
