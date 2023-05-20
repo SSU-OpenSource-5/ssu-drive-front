@@ -6,6 +6,7 @@ import BottomNavigation from './components/BottomNavbar';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './theme';
 import Root from './routes/root';
+import EditPage from './pages/EditPage/EditPage';
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
       {
         path: 'drive',
         element: <DrivingPage />,
+      },
+      {
+        path: 'edit',
+        element: <EditPage />,
       },
     ],
   },
