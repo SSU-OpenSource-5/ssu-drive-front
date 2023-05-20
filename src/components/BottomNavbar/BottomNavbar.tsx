@@ -51,8 +51,14 @@ const BottomNavbar = () => {
           label="주행"
           icon={<SvgIcon component={Auto} />}
         />
-        {/* <BottomNavigationAction label="편집" icon={<Film />} />
-        <BottomNavigationAction label="설정" icon={<Cog />} /> */}
+        <BottomNavigationAction
+          component={Link}
+          to="/edit"
+          value="/edit"
+          label="편집"
+          icon={<SvgIcon component={Film} />}
+        />
+        {/* <BottomNavigationAction label="설정" icon={<Cog />} /> */}
       </BottomNavigation>
     </Paper>
     // </Box>
