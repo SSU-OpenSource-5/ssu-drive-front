@@ -1,15 +1,16 @@
-import { style } from '@vanilla-extract/css';
+import styled from '@emotion/styled';
+
 import { TEXT_STYLES } from '../../constants/styles/textStyle';
 import { COLORS } from '../../constants/styles/color';
 
-export const Wrapper = style({
+export const Wrapper = styled.div({
   width: '100%',
   height: '100%',
   position: 'relative',
   padding: 22,
 });
 
-export const CaptureButton = style({
+export const CaptureButton = styled.button({
   position: 'absolute',
   bottom: 23,
   left: 22,
