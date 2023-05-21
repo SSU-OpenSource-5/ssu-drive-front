@@ -45,7 +45,11 @@ const MainTemplate = () => {
       <div className={styles.DegreeBoxWrapper}>
         운전 지수
         {dummyDegree.map((degree) => (
-          <DegreeBox type={degree.type} degree={degree.degree} />
+          <DegreeBox
+            key={degree.type}
+            type={degree.type}
+            degree={degree.degree}
+          />
         ))}
       </div>
       <div className={styles.feedboxsWrapper}>
