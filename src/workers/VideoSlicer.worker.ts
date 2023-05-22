@@ -87,3 +87,5 @@ ctx.addEventListener('message', (event) => {
     sliceVideoAroundTimestamp(blob, timestamp);
   }
 });
+
+export {};
