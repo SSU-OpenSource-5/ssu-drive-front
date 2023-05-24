@@ -20,9 +20,17 @@ const DrivingCam = ({
 }: DrivingCamProps) => {
   return (
     <styles.Wrapper>
-      <Webcam audio={false} ref={webcamRef} />
-      <button onClick={onStartDrive}>운전 시작</button>
-      <button onClick={onEndDrive}>운전 종료</button>
+      <Webcam
+        audio
+        height={'100%'}
+        width={'100%'}
+        videoConstraints={{
+          facingMode: 'environment',
+        }}
+        ref={webcamRef}
+      />
+      {/*<button onClick={onStartDrive}>운전 시작</button>
+      <button onClick={onEndDrive}>운전 종료</button>*/}
       <styles.CaptureButton onClick={addTimestamp}>
         타임 스탬프 찍기
       </styles.CaptureButton>

@@ -7,7 +7,6 @@ export const Wrapper = styled.div({
   width: '100%',
   height: '100%',
   position: 'relative',
-  padding: 22,
 });
 
 export const CaptureButton = styled.button({
