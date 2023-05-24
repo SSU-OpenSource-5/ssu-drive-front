@@ -10,17 +10,11 @@ import Root from './routes/root';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Root />,
-    children: [
-      {
-        path: '/',
-        element: <MainPage />,
-      },
-      {
-        path: 'drive',
-        element: <DrivingPage />,
-      },
-    ],
+    element: <MainPage />,
+  },
+  {
+    path: 'drive',
+    element: <DrivingPage />,
   },
 ]);
 

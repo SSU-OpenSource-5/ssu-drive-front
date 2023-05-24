@@ -18,6 +18,7 @@ globalStyle('button', {
 
 export const Container = style({
   width: '100%',
+  minHeight: '100vh',
   maxWidth: 390,
   margin: '0 auto',
 });
