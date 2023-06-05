@@ -51,8 +51,12 @@ const BottomNavbar = () => {
           value="/drive"
           icon={<SvgIcon component={Auto} />}
         />
-        <BottomNavigationAction icon={<Film />} />
-        <BottomNavigationAction icon={<Cog />} />
+        <BottomNavigationAction
+          component={Link}
+          to="/edit"
+          value="/edit"
+          icon={<SvgIcon component={Film} />}
+        />
       </BottomNavigation>
     </Paper>
     // </Box>
