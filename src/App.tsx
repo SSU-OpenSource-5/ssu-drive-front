@@ -11,21 +11,15 @@ import EditPage from './pages/EditPage/EditPage';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Root />,
-    children: [
-      {
-        path: '/',
-        element: <MainPage />,
-      },
-      {
-        path: 'drive',
-        element: <DrivingPage />,
-      },
-      {
-        path: 'edit',
-        element: <EditPage />,
-      },
-    ],
+    element: <MainPage />,
+  },
+  {
+    path: 'drive',
+    element: <DrivingPage />,
+  },
+  {
+    path: 'edit',
+    element: <EditPage />,
   },
 ]);
 

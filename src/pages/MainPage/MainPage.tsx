@@ -1,9 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import MainArticle from '../../components/MainArticle';
 import FeedbackBox from '../../components/FeedbackBox';
+import DegreeBox from '../../components/DegreeBox';
+import BottomNavbar from '../../components/BottomNavbar';
 
 import * as styles from './MainPage.css';
-import DegreeBox from '../../components/DegreeBox';
 
 const dummyFeedBack = [
   {
@@ -45,7 +46,11 @@ const MainTemplate = () => {
       <div className={styles.DegreeBoxWrapper}>
         운전 지수
         {dummyDegree.map((degree) => (
-          <DegreeBox type={degree.type} degree={degree.degree} />
+          <DegreeBox
+            key={degree.type}
+            type={degree.type}
+            degree={degree.degree}
+          />
         ))}
       </div>
       <div className={styles.feedboxsWrapper}>
@@ -57,6 +62,7 @@ const MainTemplate = () => {
           />
         ))}
       </div>
+      <BottomNavbar />
     </div>
   );
 };
