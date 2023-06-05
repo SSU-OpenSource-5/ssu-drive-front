@@ -18,8 +18,10 @@ const BottomNavbar = () => {
     // TODO MAXWIDTH로 변경
     // <Box sx={{ pb: 7 }}>
     <Paper
+      className="bottom-navbar-container"
       sx={{
-        maxWidth: 390,
+        width: '100%',
+        maxWidth: '390px',
         position: 'fixed',
         margin: '0 auto',
         bottom: 0,
@@ -41,18 +43,16 @@ const BottomNavbar = () => {
           component={Link}
           to="/"
           value="/"
-          label="홈"
           icon={<SvgIcon component={Home} />}
         />
         <BottomNavigationAction
           component={Link}
           to="/drive"
           value="/drive"
-          label="주행"
           icon={<SvgIcon component={Auto} />}
         />
-        {/* <BottomNavigationAction label="편집" icon={<Film />} />
-        <BottomNavigationAction label="설정" icon={<Cog />} /> */}
+        <BottomNavigationAction icon={<Film />} />
+        <BottomNavigationAction icon={<Cog />} />
       </BottomNavigation>
     </Paper>
     // </Box>
