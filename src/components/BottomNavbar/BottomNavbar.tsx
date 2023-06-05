@@ -55,7 +55,6 @@ const BottomNavbar = () => {
           component={Link}
           to="/edit"
           value="/edit"
-          label="편집"
           icon={<SvgIcon component={Film} />}
         />
       </BottomNavigation>
