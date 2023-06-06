@@ -1,9 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import MainArticle from '../../components/MainArticle';
 import FeedbackBox from '../../components/FeedbackBox';
+import DegreeBox from '../../components/DegreeBox';
+import BottomNavbar from '../../components/BottomNavbar';
 
 import * as styles from './MainPage.css';
-import DegreeBox from '../../components/DegreeBox';
 
 const dummyFeedBack = [
   {
@@ -61,6 +62,7 @@ const MainTemplate = () => {
           />
         ))}
       </div>
+      <BottomNavbar />
     </div>
   );
 };
