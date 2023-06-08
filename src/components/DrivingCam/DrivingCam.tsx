@@ -1,5 +1,3 @@
-import { useEffect, useRef, useState } from 'react';
-import { useWebcam } from '../../hooks';
 import Webcam from 'react-webcam';
 import { formatSecondsToHms } from '../../utils/timeUtils';
 
@@ -30,16 +28,15 @@ const DrivingCam = ({
         }}
         ref={webcamRef}
       />
-      <button onClick={onStartDrive}>운전 시작</button>
-      <button onClick={onEndDrive}>운전 종료</button>
+      <styles.EndDriveButton onClick={onEndDrive}>
+        운전 종료
+      </styles.EndDriveButton>
       <styles.ElapsedTimeWContainer>
         {formatSecondsToHms(recordElapsedTime)}
       </styles.ElapsedTimeWContainer>
       <styles.CaptureButton onClick={addTimestamp}>
         타임 스탬프 찍기
       </styles.CaptureButton>
-      {/*<div>타임 스탬프 : {currentTimestamp}</div>
-      {currentTimestamp && <div>타임 스탬프를 30초 이내 찍을 수 없어요</div>}*/}
     </styles.Wrapper>
   );
 };

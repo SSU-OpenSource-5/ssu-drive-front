@@ -18,6 +18,12 @@ const DrivingPage = () => {
   } = useWebcam();
 
   useEffect(() => {
+    // 페이지 진입 3초 후 자동으로 운전 시작하기
+    setTimeout(() => {
+      onStartRecord();
+      alert('운전을 시작합니다');
+    }, 3000);
+
     VideoSlicerWorkerRef.current = new Worker(
       new URL('../../workers/VideoSlicer.worker.ts', import.meta.url),
       { type: 'classic' },
