@@ -30,7 +30,18 @@ const BottomNavbar = ({ isLandscape = false }: { isLandscape?: boolean }) => {
   return (
     // TODO MAXWIDTH로 변경
     // <Box sx={{ pb: 7 }}>
-    <Paper className="bottom-navbar-container" sx={{ position: 'fixed' }}>
+    <Paper
+      className="bottom-navbar-container"
+      sx={{
+        width: '100%',
+        maxWidth: '390px',
+        position: 'fixed',
+        margin: '0 auto',
+        bottom: 0,
+        left: 0,
+        right: 0,
+      }}
+    >
       <BottomNavigation
         showLabels
         value={useLocation().pathname}

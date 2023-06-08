@@ -1,19 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import DrivingCam from '../../components/DrivingCam';
 import { useWebcam } from '../../hooks';
-import styled from '@emotion/styled';
+import DrivingCam from '../../components/DrivingCam';
 
-const PageWrapper = styled.div`
-  @media (orientation: portrait) {
-    transform: rotate(-90deg);
-    transform-origin: top left;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100vh;
-    height: 100vw;
-  }
-`;
+import * as styles from './DrivingPage.style';
+import BottomNavbar from '../../components/BottomNavbar';
 
 const DrivingPage = () => {
   const [currentTimestamp, setCurrentTimestamp] = useState<number | null>(null);
@@ -30,7 +20,7 @@ const DrivingPage = () => {
   useEffect(() => {
     VideoSlicerWorkerRef.current = new Worker(
       new URL('../../workers/VideoSlicer.worker.ts', import.meta.url),
-      { type: 'module' },
+      { type: 'classic' },
     );
     VideoSlicerWorkerRef.current.addEventListener('message', (event) => {
       const { type, videoURL } = event.data;
@@ -85,14 +75,16 @@ const DrivingPage = () => {
   };
 
   return (
-    <PageWrapper>
+    <styles.PageWrapper>
       <DrivingCam
         webcamRef={webcamRef}
         onStartDrive={onStartRecord}
         onEndDrive={onEndDrive}
         addTimestamp={addTimestamp}
+        recordElapsedTime={recordElapsedTime}
       />
-    </PageWrapper>
+      <BottomNavbar />
+    </styles.PageWrapper>
   );
 };
 
