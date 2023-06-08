@@ -31,20 +31,19 @@ async function fetchVideoToFFmpeg(blob: Blob, timestamp: number) {
 
   const ffmpeg = createFFmpeg({
     mainName: 'main',
-    //log: true,
-    corePath: 'https://unpkg.com/@ffmpeg/core-st@0.11.1/dist/ffmpeg-core.js',
+    log: true,
   });
   await ffmpeg.load();
 
   // 추출할 영상의 시작, 종료 시간
-  const [startTime, endTime] = formatSecondsToHms(timestamp);
+  const [startTime, endTime] = getTimeRangeAroundTimestamp(timestamp);
 
   const str = `[timestamp: ${formatSecondsToHms(
     timestamp,
   )}] 영상을 ${startTime}부터 ${endTime}까지 추출합니다.`;
-  console.time(str);
 
   ffmpeg.FS('writeFile', VIDEO_INPUT_NAME, await fetchFile(blob));
+
   await ffmpeg.run(
     '-i',
     VIDEO_INPUT_NAME,
@@ -52,6 +51,10 @@ async function fetchVideoToFFmpeg(blob: Blob, timestamp: number) {
     startTime,
     '-to',
     endTime,
+    '-c:v',
+    'copy',
+    '-c:a',
+    'copy',
     '-f',
     'mp4',
     VIDEO_OUTPUT_NAME,
@@ -61,7 +64,6 @@ async function fetchVideoToFFmpeg(blob: Blob, timestamp: number) {
   const videoURL = URL.createObjectURL(
     new Blob([data.buffer], { type: 'video/mp4' }),
   );
-  console.timeEnd(str);
 
   return videoURL;
 }
@@ -87,5 +89,3 @@ ctx.addEventListener('message', (event) => {
     sliceVideoAroundTimestamp(blob, timestamp);
   }
 });
-
-export {};

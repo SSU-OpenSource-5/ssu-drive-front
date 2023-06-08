@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Webcam from 'react-webcam';
 
 // react-webcam을 이용해 영상을 녹화하는 hook 함수
@@ -7,6 +7,12 @@ export const useWebcam = () => {
   const mediaRecorderRef = useRef<MediaRecorder>();
   const recordDataRequestRef = useRef<number>();
   const intervalRef = useRef<number>();
+
+  useEffect(() => {
+    recordDataRequestRef.current = setInterval(() => {
+      mediaRecorderRef.current?.requestData();
+    }, 1000);
+  }, []);
 
   // 녹화된 영상의 Blob 배열
   const [recordedChunks, setRecordedChunks] = useState<Array<BlobPart>>([]);
