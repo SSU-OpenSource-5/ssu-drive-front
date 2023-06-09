@@ -63,8 +63,8 @@ async function fetchVideoToFFmpeg(blob: Blob, timestamp: number) {
   const data = ffmpeg.FS('readFile', VIDEO_OUTPUT_NAME);
   const videoURL = URL.createObjectURL(
     new Blob([data.buffer], { type: 'video/mp4' }),
+    //new File([data.buffer], 'video.mp4'),
   );
-
   return videoURL;
 }
 
@@ -89,3 +89,5 @@ ctx.addEventListener('message', (event) => {
     sliceVideoAroundTimestamp(blob, timestamp);
   }
 });
+
+export type {};

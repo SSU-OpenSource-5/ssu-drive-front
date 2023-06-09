@@ -4,6 +4,7 @@ import DrivingCam from '../../components/DrivingCam';
 
 import * as styles from './DrivingPage.style';
 import BottomNavbar from '../../components/BottomNavbar';
+import { uploadVideoAsync } from '../../apis/video';
 
 const DrivingPage = () => {
   const [currentTimestamp, setCurrentTimestamp] = useState<number | null>(null);
@@ -64,13 +65,19 @@ const DrivingPage = () => {
   };
 
   // 타임스탬프를 기준으로 잘려진 영상을 다운받는 함수
-  const downloadSlicedVideo = (videoURL: string) => {
-    const a = document.createElement('a');
-    document.body.appendChild(a);
-    a.href = videoURL;
-    a.download = `video-${new Date()}.mp4`;
-    a.click();
+  const downloadSlicedVideo = async (videoURL: string) => {
+    //const a = document.createElement('a');
+    //document.body.appendChild(a);
+    //a.href = videoURL;
+    //a.download = `video-${new Date()}.mp4`;
+    //a.click();
     window.URL.revokeObjectURL(videoURL);
+
+    const response = await uploadVideoAsync(
+      `${new Date().toISOString()}`,
+      videoURL,
+    );
+    console.log(response);
   };
 
   const onEndDrive = () => {
