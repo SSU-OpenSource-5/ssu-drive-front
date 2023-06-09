@@ -19,75 +19,30 @@ import {
   FormControlLabel,
   Radio,
   TextField,
+  Slider,
 } from '@mui/material';
+import { videoApis } from '../../../apis/videoApis';
 
-const steps = [
-  {
-    label: '편집할 영상을 선택해주세요.',
-    description: (
-      <Box className={styles.Wrapper}>
-        <VideoCard></VideoCard>
-        <VideoCard></VideoCard>
-      </Box>
-    ),
-  },
-  {
-    label: '편집할 타임스탬프를 선택해주세요.',
-    description: <StampCard></StampCard>,
-  },
-  {
-    label: '대상 차량을 선택해주세요.',
-    description: <CarCard></CarCard>,
-  },
-  {
-    label: '운전 유형을 선택해주세요.',
-    description: (
-      <FormControl>
-        <FormLabel id="demo-radio-buttons-group-label">운전 유형</FormLabel>
-        <RadioGroup
-          aria-labelledby="demo-radio-buttons-group-label"
-          defaultValue="female"
-          name="radio-buttons-group"
-        >
-          <FormControlLabel
-            value="female"
-            control={<Radio />}
-            label="위험 운전"
-          />
-          <FormControlLabel
-            value="male"
-            control={<Radio />}
-            label="난폭 운전"
-          />
-          <FormControlLabel
-            value="other"
-            control={<Radio />}
-            label="사고 운전"
-          />
-        </RadioGroup>
-      </FormControl>
-    ),
-  },
-  {
-    label: '전달할 메시지를 작성해주세요.',
-    description: (
-      <TextField
-        id="outlined-multiline-flexible"
-        label="전달할 코멘트"
-        multiline
-        sx={{
-          width: '100%',
-        }}
-      />
-    ),
-  },
-];
+interface SelectedVideo {
+  videoId: number;
+  timestamp: string;
+}
 
-export default function VerticalLinearStepper() {
+const VerticalLinearStepper: React.FC = () => {
   const [activeStep, setActiveStep] = React.useState(0);
+  const [selectedVideo, setSelectedVideo] = React.useState<{
+    videoId: number;
+    timestamp: string;
+  } | null>(null);
+
+  const handleVideoSelect = (videoId: number, timestamp: string) => {
+    setSelectedVideo({ videoId, timestamp });
+  };
 
   const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    if (selectedVideo) {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    }
   };
 
   const handleBack = () => {
@@ -96,7 +51,64 @@ export default function VerticalLinearStepper() {
 
   const handleReset = () => {
     setActiveStep(0);
+    setSelectedVideo(null);
   };
+
+  const steps = [
+    {
+      label: '편집할 영상을 선택하세요',
+      content: (
+        <VideoCard
+          onSelectVideo={(videoId, timestamp) =>
+            handleVideoSelect(videoId, timestamp)
+          }
+        />
+      ),
+    },
+    {
+      label: '타임스탬프를 선택해주세요',
+      content: <StampCard selectedVideo={selectedVideo!} />, //null 무시
+    },
+    {
+      label: '대상차량을 선택해주세요',
+      content: <CarCard />,
+    },
+    {
+      label: '운전 점수를 매겨주세요',
+      content: (
+        <FormControl
+          sx={{
+            minWidth: '100%',
+          }}
+        >
+          <FormLabel id="demo-radio-buttons-group-label">운전 점수</FormLabel>
+          <Slider
+            aria-label="Temperature"
+            defaultValue={30}
+            // getAriaValueText={'Test'}
+            valueLabelDisplay="auto"
+            step={10}
+            marks
+            min={10}
+            max={110}
+          />
+        </FormControl>
+      ),
+    },
+    {
+      label: '전달할 메시지를 선택해주세요',
+      content: (
+        <TextField
+          id="outlined-multiline-flexible"
+          label="Comment to send"
+          multiline
+          sx={{
+            width: '100%',
+          }}
+        />
+      ),
+    },
+  ];
 
   return (
     <Box sx={{ maxWidth: 400 }}>
@@ -106,29 +118,30 @@ export default function VerticalLinearStepper() {
             <StepLabel
               optional={
                 index === 4 ? (
-                  <Typography variant="caption">마지막 작업</Typography>
+                  <Typography variant="caption">Last step</Typography>
                 ) : null
               }
             >
               {step.label}
             </StepLabel>
             <StepContent>
-              <Typography>{step.description}</Typography>
+              <Typography>{step.content}</Typography>
               <Box sx={{ mb: 2 }}>
                 <div>
                   <Button
                     variant="contained"
                     onClick={handleNext}
                     sx={{ mt: 1, mr: 1 }}
+                    disabled={selectedVideo === null && index === 0}
                   >
-                    {index === steps.length - 1 ? '보내기' : '다음'}
+                    {index === steps.length - 1 ? 'Send' : 'Next'}
                   </Button>
                   <Button
                     disabled={index === 0}
                     onClick={handleBack}
                     sx={{ mt: 1, mr: 1 }}
                   >
-                    뒤로
+                    Back
                   </Button>
                 </div>
               </Box>
@@ -138,7 +151,7 @@ export default function VerticalLinearStepper() {
       </Stepper>
       {activeStep === steps.length && (
         <Paper square elevation={0} sx={{ p: 3 }}>
-          <Typography>All steps completed - you&apos;re finished</Typography>
+          <Typography>피드백 전달 완료!</Typography>
           <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
             Reset
           </Button>
@@ -146,4 +159,6 @@ export default function VerticalLinearStepper() {
       )}
     </Box>
   );
-}
+};
+
+export default VerticalLinearStepper;

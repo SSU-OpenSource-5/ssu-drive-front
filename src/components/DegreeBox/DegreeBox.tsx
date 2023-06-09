@@ -14,7 +14,6 @@ export interface DegreeProps {
 }
 
 //100% -> 온도 변환( 100% -> 73도)=
-const value = 100 / 73;
 
 const DegreeBox = ({ type, degree }: DegreeProps) => {
   return (
@@ -24,10 +23,10 @@ const DegreeBox = ({ type, degree }: DegreeProps) => {
         <div className={styles.degree}>
           {' '}
           {degree}
-          <img src={degree > 36.5 ? happyFace : sadFace}></img>
+          <img src={degree >= 50 ? happyFace : sadFace}></img>
         </div>
       </div>
-      <ProgressBar percent={degree * value} filledBackground={COLORS.accent} />
+      <ProgressBar percent={degree} filledBackground={COLORS.accent} />
     </div>
   );
 };
