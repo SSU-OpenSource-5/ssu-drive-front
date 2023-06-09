@@ -7,7 +7,6 @@ import EndDrivingPage from './pages/EndDrivingPage';
 import { Container } from './App.css';
 import { ThemeProvider } from '@mui/material/styles';
 
-import theme from './theme';
 import Root from './routes/root';
 import EditPage from './pages/EditPage/EditPage';
 
@@ -21,7 +20,6 @@ const router = createBrowserRouter([
     element: <DrivingPage />,
   },
   {
-
     path: '/finish-drive',
     element: <EndDrivingPage />,
   },
