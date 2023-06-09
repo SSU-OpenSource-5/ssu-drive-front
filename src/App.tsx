@@ -1,10 +1,12 @@
+import theme from './theme';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import MainPage from './pages/MainPage';
 import DrivingPage from './pages/DrivingPage';
+import EndDrivingPage from './pages/EndDrivingPage';
+
 import { Container } from './App.css';
-import BottomNavigation from './components/BottomNavbar';
 import { ThemeProvider } from '@mui/material/styles';
-import theme from './theme';
+
 import Root from './routes/root';
 import EditPage from './pages/EditPage/EditPage';
 
@@ -14,11 +16,15 @@ const router = createBrowserRouter([
     element: <MainPage />,
   },
   {
-    path: 'drive',
+    path: '/drive',
     element: <DrivingPage />,
   },
   {
-    path: 'edit',
+    path: '/finish-drive',
+    element: <EndDrivingPage />,
+  },
+  {
+    path: '/edit',
     element: <EditPage />,
   },
 ]);

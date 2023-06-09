@@ -1,13 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
 import { useWebcam } from '../../hooks';
-import DrivingCam from '../../components/DrivingCam';
 
 import * as styles from './DrivingPage.style';
 import BottomNavbar from '../../components/BottomNavbar';
+import DrivingCam from '../../components/DrivingCam';
+
+import { uploadVideoAsync } from '../../apis/video';
+import { useNavigate } from 'react-router-dom';
 
 const DrivingPage = () => {
-  const [currentTimestamp, setCurrentTimestamp] = useState<number | null>(null);
+  const navigate = useNavigate();
   const VideoSlicerWorkerRef = useRef<Worker | null>();
+  const [currentTimestamp, setCurrentTimestamp] = useState<number | null>(null);
 
   const {
     webcamRef,
@@ -18,15 +22,21 @@ const DrivingPage = () => {
   } = useWebcam();
 
   useEffect(() => {
+    // 페이지 진입 3초 후 자동으로 운전 시작하기
+    setTimeout(() => {
+      onStartRecord();
+      alert('운전을 시작합니다');
+    }, 3000);
+
     VideoSlicerWorkerRef.current = new Worker(
       new URL('../../workers/VideoSlicer.worker.ts', import.meta.url),
-      { type: 'module' },
+      { type: 'classic' },
     );
     VideoSlicerWorkerRef.current.addEventListener('message', (event) => {
-      const { type, videoURL } = event.data;
+      const { type, videoBlob } = event.data;
       // Worker로부터 타임스탬프를 기준으로 잘려진 영상을 전달 받은 경우
       if (type === 'response-sliced-video') {
-        downloadSlicedVideo(videoURL);
+        uploadSlicedVideo(videoBlob);
         // 타임 스탬프를 다시 찍을 수 있는 상태로 초기화
         setCurrentTimestamp(null);
       }
@@ -58,13 +68,21 @@ const DrivingPage = () => {
   };
 
   // 타임스탬프를 기준으로 잘려진 영상을 다운받는 함수
-  const downloadSlicedVideo = (videoURL: string) => {
-    const a = document.createElement('a');
-    document.body.appendChild(a);
-    a.href = videoURL;
-    a.download = `video-${new Date()}.mp4`;
-    a.click();
-    window.URL.revokeObjectURL(videoURL);
+  const uploadSlicedVideo = async (videoBlob: Blob) => {
+    //const a = document.createElement('a');
+    //document.body.appendChild(a);
+    //a.href = videoURL;
+    //a.download = `video-${new Date()}.mp4`;
+    //a.click();
+    //window.URL.revokeObjectURL(videoURL);
+
+    const formData = new FormData();
+    formData.append('file', videoBlob);
+    formData.append('memberId', '1');
+    formData.append('timestamp', new Date().toISOString());
+
+    const response = await uploadVideoAsync(formData);
+    console.log(response);
   };
 
   const onEndDrive = () => {
@@ -72,6 +90,8 @@ const DrivingPage = () => {
     onStopRecord();
     // 녹화 종료 후에 타임스탬프가 남아있는 경우, 해당 스탬프를 기준으로 영상 추출 (timestamp-30 ~ endTime)
     if (currentTimestamp) requestSlicedVideo();
+    // 운전 종료 페이지로 이동
+    navigate('/finish-drive');
   };
 
   return (
@@ -81,6 +101,7 @@ const DrivingPage = () => {
         onStartDrive={onStartRecord}
         onEndDrive={onEndDrive}
         addTimestamp={addTimestamp}
+        recordElapsedTime={recordElapsedTime}
       />
       <BottomNavbar />
     </styles.PageWrapper>

@@ -12,8 +12,21 @@ import { ReactComponent as Auto } from '../../assets/icons/auto.svg';
 import { ReactComponent as Home } from '../../assets/icons/home.svg';
 import { SvgIcon } from '@mui/material';
 
-const BottomNavbar = () => {
+const BottomNavbar = ({ isLandscape = false }: { isLandscape?: boolean }) => {
   const [value, setValue] = React.useState(0);
+  //const dynamicStyle = isLandscape
+  //  ? {
+  //      width: '100vh',
+  //      height: '57px',
+  //      top: 0,
+  //      right: 0,
+  //    }
+  //  : {
+  //      width: '100vw',
+  //      height: '57px',
+  //      bottom: 0,
+  //      left: 0,
+  //    };
   return (
     // TODO MAXWIDTH로 변경
     // <Box sx={{ pb: 7 }}>
