@@ -67,7 +67,7 @@ const VerticalLinearStepper: React.FC = () => {
     },
     {
       label: '타임스탬프를 선택해주세요',
-      content: <StampCard selectedVideo={selectedVideo} />,
+      content: <StampCard selectedVideo={selectedVideo!} />, //null 무시
     },
     {
       label: '대상차량을 선택해주세요',

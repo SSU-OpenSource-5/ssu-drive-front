@@ -38,7 +38,7 @@ const dummyDegree = [{ type: ' ', degree: 50 }];
 const MainTemplate = () => {
   const navigate = useNavigate();
   const [degree, setDegree] = useState(0);
-  const [items, setItems] = useState();
+  const [items, setItems] = useState([]);
 
   useEffect(() => {
     const fetchMember = async () => {
@@ -63,7 +63,7 @@ const MainTemplate = () => {
         <DegreeBox key={1} type={''} degree={degree} />
       </div>
       <div className={styles.feedboxsWrapper}>
-        {items?.map((item) => (
+        {items.map((item: any) => (
           <FeedbackBox
             key={item.itemId}
             isPositive={true}
