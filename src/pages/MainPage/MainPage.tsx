@@ -7,6 +7,7 @@ import BottomNavbar from '../../components/BottomNavbar';
 import * as styles from './MainPage.css';
 import { useEffect, useState } from 'react';
 import { memberApis } from '../../apis/memberApis';
+import Appbar from '../../components/Appbar';
 
 const dummyFeedBack = [
   {
@@ -57,6 +58,7 @@ const MainTemplate = () => {
 
   return (
     <div className={styles.wrapper}>
+      <Appbar />
       <MainArticle />
       <div className={styles.DegreeBoxWrapper}>
         운전 온도

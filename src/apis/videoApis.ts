@@ -1,7 +1,10 @@
 import axios from 'axios';
 
 const videoInstance = axios.create({
-  baseURL: 'http://15.165.190.227:8080',
+  baseURL: 'https://api.honggildong.monster',
+  headers: {
+    AccessControlAllowOrigin: '*',
+  },
 });
 
 const getVideos = async (memberId: number) => {

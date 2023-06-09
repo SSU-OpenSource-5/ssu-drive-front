@@ -134,14 +134,14 @@ const VerticalLinearStepper: React.FC = () => {
                     sx={{ mt: 1, mr: 1 }}
                     disabled={selectedVideo === null && index === 0}
                   >
-                    {index === steps.length - 1 ? 'Send' : 'Next'}
+                    {index === steps.length - 1 ? '보내기' : '다음'}
                   </Button>
                   <Button
                     disabled={index === 0}
                     onClick={handleBack}
                     sx={{ mt: 1, mr: 1 }}
                   >
-                    Back
+                    뒤로
                   </Button>
                 </div>
               </Box>

@@ -27,7 +27,8 @@ const VideoCard: FC<VideoCardProps> = ({ onSelectVideo }) => {
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        const response = await videoApis.getVideos(1);
+        const response = await videoApis.getVideos(2);
+        console.log('비디오 리스트 불러오기 성공');
         console.log(response);
         setVideos(response);
       } catch (error) {
@@ -66,16 +67,29 @@ const VideoCard: FC<VideoCardProps> = ({ onSelectVideo }) => {
             control={<Radio />}
             label={
               <Card
-                sx={{ p: 2 }}
+                sx={{ p: 2, my: 0.5 }}
                 onClick={() =>
                   handleVideoSelect(video.videoId, video.timestamp)
                 }
               >
-                <CardMedia
+                {/* <CardMedia
+                  //이미지로
+                  // component="img" // Change the component to 'img'
+                  // src={`/src/assets/images/img_blackbox${video.videoId}.png`} // Use the thumbnail URL instead of the video URL
+                  // title={`Video ${video.videoId}`}
+                  //영상
                   component="video" // Change the component to 'img'
                   src={video.url} // Use the thumbnail URL instead of the video URL
                   title={`Video ${video.videoId}`}
+                /> */}
+                <video
+                  src={video.url}
+                  controls
+                  width="250"
+                  height="150"
+                  crossOrigin="anonymous"
                 />
+
                 {/* <Typography>{video.timestamp}</Typography> */}
               </Card>
             }
