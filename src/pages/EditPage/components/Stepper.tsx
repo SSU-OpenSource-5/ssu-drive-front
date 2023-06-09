@@ -19,6 +19,7 @@ import {
   FormControlLabel,
   Radio,
   TextField,
+  Slider,
 } from '@mui/material';
 import { videoApis } from '../../../apis/videoApis';
 
@@ -29,8 +30,10 @@ interface SelectedVideo {
 
 const VerticalLinearStepper: React.FC = () => {
   const [activeStep, setActiveStep] = React.useState(0);
-  const [selectedVideo, setSelectedVideo] =
-    React.useState<SelectedVideo | null>(null);
+  const [selectedVideo, setSelectedVideo] = React.useState<{
+    videoId: number;
+    timestamp: string;
+  } | null>(null);
 
   const handleVideoSelect = (videoId: number, timestamp: string) => {
     setSelectedVideo({ videoId, timestamp });
@@ -53,7 +56,7 @@ const VerticalLinearStepper: React.FC = () => {
 
   const steps = [
     {
-      label: 'Select the video to edit',
+      label: '편집할 영상을 선택하세요',
       content: (
         <VideoCard
           onSelectVideo={(videoId, timestamp) =>
@@ -63,46 +66,37 @@ const VerticalLinearStepper: React.FC = () => {
       ),
     },
     {
-      label: 'Select the timestamp to edit',
+      label: '타임스탬프를 선택해주세요',
       content: <StampCard selectedVideo={selectedVideo} />,
     },
     {
-      label: 'Select the target car',
+      label: '대상차량을 선택해주세요',
       content: <CarCard />,
     },
     {
-      label: 'Select the driving type',
+      label: '운전 점수를 매겨주세요',
       content: (
-        <FormControl>
-          <FormLabel id="demo-radio-buttons-group-label">
-            Driving Type
-          </FormLabel>
-          <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue="female"
-            name="radio-buttons-group"
-          >
-            <FormControlLabel
-              value="female"
-              control={<Radio />}
-              label="Dangerous Driving"
-            />
-            <FormControlLabel
-              value="male"
-              control={<Radio />}
-              label="Reckless Driving"
-            />
-            <FormControlLabel
-              value="other"
-              control={<Radio />}
-              label="Accident Prone Driving"
-            />
-          </RadioGroup>
+        <FormControl
+          sx={{
+            minWidth: '100%',
+          }}
+        >
+          <FormLabel id="demo-radio-buttons-group-label">운전 점수</FormLabel>
+          <Slider
+            aria-label="Temperature"
+            defaultValue={30}
+            // getAriaValueText={'Test'}
+            valueLabelDisplay="auto"
+            step={10}
+            marks
+            min={10}
+            max={110}
+          />
         </FormControl>
       ),
     },
     {
-      label: 'Write the message to send',
+      label: '전달할 메시지를 선택해주세요',
       content: (
         <TextField
           id="outlined-multiline-flexible"
@@ -157,7 +151,7 @@ const VerticalLinearStepper: React.FC = () => {
       </Stepper>
       {activeStep === steps.length && (
         <Paper square elevation={0} sx={{ p: 3 }}>
-          <Typography>All steps completed - you&apos;re finished</Typography>
+          <Typography>피드백 전달 완료!</Typography>
           <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
             Reset
           </Button>

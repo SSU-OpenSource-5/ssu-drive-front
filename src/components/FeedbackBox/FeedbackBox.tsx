@@ -2,7 +2,8 @@ import * as styles from './FeedbackBox.css';
 import ThumbsUpIcon from '../../assets/icons/thumbsUp.svg';
 import ThumbsDownIcon from '../../assets/icons/thumbsDown.svg';
 import ArrowDown from '../../assets/icons/ArrowDown.svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { memberApis } from '../../apis/memberApis';
 
 export interface FeedbackBoxProps {
   isPositive: boolean;
@@ -23,7 +24,6 @@ const FeedbackBox = ({
   return (
     <div className={styles.wrapper} onClick={onClickBox}>
       <div className={styles.feedbackDateText}>1일 전</div>
-
       <div className={styles.boxWrapper}>
         <img
           src={isPositive ? ThumbsUpIcon : ThumbsDownIcon}

@@ -72,8 +72,8 @@ const VideoCard: FC<VideoCardProps> = ({ onSelectVideo }) => {
                 }
               >
                 <CardMedia
-                  component="img" // Change the component to 'img'
-                  src={video.thumbnailUrl} // Use the thumbnail URL instead of the video URL
+                  component="video" // Change the component to 'img'
+                  src={video.url} // Use the thumbnail URL instead of the video URL
                   title={`Video ${video.videoId}`}
                 />
                 {/* <Typography>{video.timestamp}</Typography> */}

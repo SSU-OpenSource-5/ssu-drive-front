@@ -15,7 +15,7 @@ interface StampCardProps {
 }
 
 const StampCard: React.FC<StampCardProps> = ({ selectedVideo }) => {
-  const { timestamp } = selectedVideo;
+  const { timestamp } = selectedVideo || { timestamp: '' };
 
   return (
     <Box>
