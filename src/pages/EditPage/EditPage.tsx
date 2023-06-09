@@ -14,7 +14,7 @@ export default function EditPage() {
   return (
     <>
       {/* TODO Padding으로 높이조절 하지 말고 100vh로 높이 조절 */}
-      {/* <Appbar /> */}
+      <Appbar />
       <Box
         bgcolor={COLORS.grayscale.gray1}
         padding={2}
