@@ -79,7 +79,7 @@ const DrivingPage = () => {
     const formData = new FormData();
     formData.append('file', videoBlob);
     formData.append('memberId', '1');
-    formData.append('timestamp', new Date().toISOString());
+    formData.append('timestamp', '2023-06-09T11:51:55');
 
     const response = await uploadVideoAsync(formData);
     console.log(response);
