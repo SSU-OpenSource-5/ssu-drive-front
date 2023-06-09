@@ -29,17 +29,17 @@ interface SelectedVideo {
 
 const VerticalLinearStepper: React.FC = () => {
   const [activeStep, setActiveStep] = React.useState(0);
-  const [selectedVideo, setSelectedVideo] = React.useState<SelectedVideo>({
-    videoId: 0,
-    timestamp: '',
-  });
+  const [selectedVideo, setSelectedVideo] =
+    React.useState<SelectedVideo | null>(null);
 
   const handleVideoSelect = (videoId: number, timestamp: string) => {
     setSelectedVideo({ videoId, timestamp });
   };
 
   const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    if (selectedVideo) {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    }
   };
 
   const handleBack = () => {
@@ -48,7 +48,7 @@ const VerticalLinearStepper: React.FC = () => {
 
   const handleReset = () => {
     setActiveStep(0);
-    setSelectedVideo({ videoId: 0, timestamp: '' });
+    setSelectedVideo(null);
   };
 
   const steps = [
@@ -138,6 +138,7 @@ const VerticalLinearStepper: React.FC = () => {
                     variant="contained"
                     onClick={handleNext}
                     sx={{ mt: 1, mr: 1 }}
+                    disabled={selectedVideo === null && index === 0}
                   >
                     {index === steps.length - 1 ? 'Send' : 'Next'}
                   </Button>
