@@ -9,6 +9,7 @@ interface DrivingCamProps {
   onStartDrive: () => void;
   onEndDrive: () => void;
   addTimestamp: () => Promise<void>;
+  feedbackRef: React.RefObject<HTMLDivElement>;
 }
 
 const DrivingCam = ({
@@ -17,6 +18,7 @@ const DrivingCam = ({
   onStartDrive,
   onEndDrive,
   addTimestamp,
+  feedbackRef,
 }: DrivingCamProps) => {
   return (
     <styles.Wrapper>
@@ -28,6 +30,7 @@ const DrivingCam = ({
         }}
         ref={webcamRef}
       />
+      <styles.FeedbackDiv ref={feedbackRef} />
       <styles.EndDriveButton onClick={onEndDrive}>
         운전 종료
       </styles.EndDriveButton>

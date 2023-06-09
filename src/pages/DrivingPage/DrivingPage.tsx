@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 const DrivingPage = () => {
   const navigate = useNavigate();
   const VideoSlicerWorkerRef = useRef<Worker | null>();
+  const feedbackRef = useRef<HTMLDivElement>(null);
   const [currentTimestamp, setCurrentTimestamp] = useState<number | null>(null);
 
   const {
@@ -53,6 +54,7 @@ const DrivingPage = () => {
   // 타임스탬프를 눌렀을 때 실행되는 함수
   const addTimestamp = async () => {
     setCurrentTimestamp(recordElapsedTime);
+    feedbackRef.current!.innerText = '타임스탬프가 찍혔어요';
   };
 
   // 워커에게 녹화 데이터와 타임스탬프를 전달하여 1분 영상 추출을 요청하는 함수
@@ -97,6 +99,7 @@ const DrivingPage = () => {
   return (
     <styles.PageWrapper>
       <DrivingCam
+        feedbackRef={feedbackRef}
         webcamRef={webcamRef}
         onStartDrive={onStartRecord}
         onEndDrive={onEndDrive}
