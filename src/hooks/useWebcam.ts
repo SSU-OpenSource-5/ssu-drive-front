@@ -31,9 +31,20 @@ export const useWebcam = () => {
     // 기존 녹화 데이터를 비우고 녹화 시작
     setRecordedChunks([]);
     if (webcamRef?.current?.stream) {
-      mediaRecorderRef.current = new MediaRecorder(webcamRef.current.stream, {
-        mimeType: 'video/webm',
-      });
+      let options: MediaRecorderOptions;
+      if (MediaRecorder.isTypeSupported('video/webm; codecs=vp9')) {
+        options = { mimeType: 'video/webm; codecs=vp9' };
+      } else if (MediaRecorder.isTypeSupported('video/webm')) {
+        options = { mimeType: 'video/webm' };
+      } else if (MediaRecorder.isTypeSupported('video/mp4')) {
+        options = { mimeType: 'video/mp4', videoBitsPerSecond: 100000 };
+      } else {
+        throw new Error('no suitable mimetype found for this device');
+      }
+      mediaRecorderRef.current = new MediaRecorder(
+        webcamRef.current.stream,
+        options,
+      );
 
       mediaRecorderRef.current.addEventListener(
         'dataavailable',

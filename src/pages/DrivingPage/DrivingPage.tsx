@@ -11,7 +11,9 @@ import { useNavigate } from 'react-router-dom';
 const DrivingPage = () => {
   const navigate = useNavigate();
   const VideoSlicerWorkerRef = useRef<Worker | null>();
+  const feedbackRef = useRef<HTMLDivElement>(null);
   const [currentTimestamp, setCurrentTimestamp] = useState<number | null>(null);
+  const timestampDate = useRef<Date>();
 
   const {
     webcamRef,
@@ -25,8 +27,8 @@ const DrivingPage = () => {
     // 페이지 진입 3초 후 자동으로 운전 시작하기
     setTimeout(() => {
       onStartRecord();
-      alert('운전을 시작합니다');
-    }, 3000);
+      alert('운전을 시작합니다 🚙');
+    }, 4000);
 
     VideoSlicerWorkerRef.current = new Worker(
       new URL('../../workers/VideoSlicer.worker.ts', import.meta.url),
@@ -52,7 +54,11 @@ const DrivingPage = () => {
 
   // 타임스탬프를 눌렀을 때 실행되는 함수
   const addTimestamp = async () => {
+    const targetDate = new Date();
+    timestampDate.current = targetDate;
+
     setCurrentTimestamp(recordElapsedTime);
+    feedbackRef.current!.innerText = `${targetDate.getHours()}:${targetDate.getMinutes()} 에 타임스탬프가 찍혔어요`;
   };
 
   // 워커에게 녹화 데이터와 타임스탬프를 전달하여 1분 영상 추출을 요청하는 함수
@@ -76,13 +82,20 @@ const DrivingPage = () => {
     //a.click();
     //window.URL.revokeObjectURL(videoURL);
 
-    const formData = new FormData();
-    formData.append('file', videoBlob);
-    formData.append('memberId', '1');
-    formData.append('timestamp', new Date().toISOString());
+    if (timestampDate.current !== undefined) {
+      const formData = new FormData();
+      formData.append('file', videoBlob);
+      formData.append('memberId', '1');
+      formData.append(
+        'timestamp',
+        timestampDate.current.toISOString().split('.')[0],
+      );
 
-    const response = await uploadVideoAsync(formData);
-    console.log(response);
+      const response = await uploadVideoAsync(formData);
+      console.log(response);
+    } else {
+      alert('비디오를 추출할 수 없어요😅');
+    }
   };
 
   const onEndDrive = () => {
@@ -97,6 +110,7 @@ const DrivingPage = () => {
   return (
     <styles.PageWrapper>
       <DrivingCam
+        feedbackRef={feedbackRef}
         webcamRef={webcamRef}
         onStartDrive={onStartRecord}
         onEndDrive={onEndDrive}

@@ -66,3 +66,11 @@ export const ElapsedTimeWContainer = styled.div({
   fontWeight: 400,
   textAlign: 'center',
 });
+
+export const FeedbackDiv = styled.div({
+  position: 'fixed',
+  top: 60,
+  left: 280,
+  fontSize: 15,
+  color: COLORS.red,
+});
