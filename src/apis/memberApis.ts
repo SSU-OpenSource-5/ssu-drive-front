@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const memberInstance = axios.create({
-  baseURL: 'http://15.165.190.227:8080',
+  baseURL: 'api.honggildong.monster',
 });
 
 const getMember = async (memberId: number) => {
