@@ -65,20 +65,24 @@ async function fetchVideoToFFmpeg(blob: Blob, timestamp: number) {
     new Blob([data.buffer], { type: 'video/mp4' }),
     //new File([data.buffer], 'video.mp4'),
   );
-  return videoURL;
+
+  console.log(new Blob([data.buffer], { type: 'video/mp4' }));
+
+  return new Blob([data.buffer], { type: 'video/mp4' });
 }
 
 // funciton normally in workers
 const ctx: Worker = self as unknown as Worker;
 
 async function sliceVideoAroundTimestamp(blob: Blob, timestamp: number) {
-  const slicedVideoURL = await fetchVideoToFFmpeg(blob, timestamp);
+  const slicedVideoBlob = await fetchVideoToFFmpeg(blob, timestamp);
 
   // ffmpeg이 성공적으로 영상을 추출한 경우 메인 스레드에게 해당 영상의 url을 반환
-  if (slicedVideoURL) {
+  if (slicedVideoBlob) {
     ctx.postMessage({
       type: 'response-sliced-video',
-      videoURL: slicedVideoURL,
+      //videoURL: slicedVideoURL,
+      videoBlob: slicedVideoBlob,
     });
   }
 }
