@@ -11,5 +11,4 @@ export const COLORS = {
   red: '#FF4040',
 };
 
-
-export {}
+export {};
